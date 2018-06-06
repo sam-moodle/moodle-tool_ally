@@ -23,14 +23,12 @@ php:
 env:
  global:
   - IGNORE_PATHS=node_modules
-  - MOODLE_BRANCH=master
+  - MOODLE_BRANCH=MOODLE_34_STABLE
  matrix:
   - DB=pgsql
   - DB=mysqli
 
 matrix:
-    include:
-      - env: MOODLE_BRANCH=master DB=pgsql
     allow_failures:
       - env: MOODLE_BRANCH=master DB=pgsql
 
@@ -43,10 +41,10 @@ before_install:
   - export PATH="$(cd ci/bin; pwd):$(cd ci/vendor/bin; pwd):$PATH"
 
 install:
-  - moodle-plugin-ci add-plugin -b ${MOODLE_BRANCH}  moodlerooms/moodle-filter_ally
-  - moodle-plugin-ci add-plugin -b ${MOODLE_BRANCH}  moodlerooms/moodle-report_allylti
-  - moodle-plugin-ci add-plugin -b master  jmvedrine/moodle-qtype_ddmatch
-  - moodle-plugin-ci add-plugin -b ${MOODLE_BRANCH}  moodlerooms/moodle-mod_hsuforum
+  - moodle-plugin-ci add-plugin -b master moodlerooms/moodle-filter_ally
+  - moodle-plugin-ci add-plugin -b master moodlerooms/moodle-report_allylti
+  - moodle-plugin-ci add-plugin -b master jmvedrine/moodle-qtype_ddmatch
+  - moodle-plugin-ci add-plugin -b master moodlerooms/moodle-mod_hsuforum
   - moodle-plugin-ci install
 
 script:
